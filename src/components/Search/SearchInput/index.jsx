@@ -1,38 +1,43 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getMovies } from "../../../redux"
 import styled, { keyframes } from "styled-components"
+import { setMovieName } from "../../../redux/feature/movie-slice"
 
 export const SearchInput = ({ type }) => {
     const dispatch = useDispatch()
-    const [onChangeName, setOnChangeName] = useState("santa")
-    const [onClickName, setOnClickName] = useState("santa")
+    const [value, setValue] = useState("")
+    const ref = useRef()
+    // let timeoutId = null;
     const { moviesList: { data } } = useSelector((state) => state.movie)
 
-    const searchMovieHandler = () => dispatch(getMovies(onClickName))
+    const searchMovieHandler = () => !type && dispatch(getMovies(ref.current.value))
+
+    const handler = (value) => type && dispatch(getMovies(value))
 
     useEffect(() => {
-        dispatch(getMovies(onChangeName))
-    }, [onChangeName])
+        dispatch(setMovieName(value))
+        const timeoutId = setTimeout(() => handler(value), 450)
+
+        return () => clearTimeout(timeoutId)
+    }, [value])
+
+    useEffect(() => {
+        dispatch(getMovies("santa"))
+    }, [])
 
     return <>
         <Title>Search Fav Movie App</Title>
         <FormContainer onSubmit={(e) => e.preventDefault()}>
             <FormElements>
-                {type ? <Input
+                <Input
                     type="text"
                     fullWidth
-                    value={onChangeName}
-                    onChange={(e) => setOnChangeName(e.target.value)}
-                /> :
-                    <Input
-                        type="text"
-                        fullWidth
-                        value={onClickName}
-                        onChange={(e) => setOnClickName(e.target.value)}
-                    />
-                }
-                <Button >
+                    // ref={ref}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                />
+                <Button>
                     <ButtonTop onClick={searchMovieHandler}>Button</ButtonTop>
                 </Button>
             </FormElements>
@@ -41,7 +46,11 @@ export const SearchInput = ({ type }) => {
     </>
 }
 
-
+// useEffect(() => {
+//     fetch(`http://www.omdbapi.com/?apikey=${"e7ebf3a9"}&s=${"spider"}&page=${3}`)
+//         .then((response) => response.json())
+//         .then((data) => console.log(data))
+// }, [])
 
 const FormContainer = styled.form`
     width: 90vw;

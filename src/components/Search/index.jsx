@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import styled from "styled-components"
 import { SearchInput } from "./SearchInput"
+import styled from "styled-components"
 
 export const Search = () => {
   const [type, setType] = useState(false)
@@ -24,12 +24,15 @@ const CheckboxContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   p{
     max-width: 80px;
     word-wrap: break-word;
     color:white;
     font-weight: 700;
+
+    span{
+      letter-spacing: 3.8px;
+    }
   }
 `
 const ToggleLabel = styled.label`

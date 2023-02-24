@@ -11,3 +11,6 @@ export const fetchMovies = async (movieName) =>
 
 export const fetchMovie = async (movieId) =>
   axios.get(`${baseURL}/?i=${movieId}&apikey=${apiKey}`);
+
+export const getNextMovieSet = async ({ movieName, page }) =>
+  axios.get(`${baseURL}/?apikey=${apiKey}&s=${movieName}&page=${page}`)

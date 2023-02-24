@@ -5,6 +5,7 @@ const movieSlice = createSlice({
   initialState: {
     moviesList: [],
     movie: {},
+    name: "santa"
   },
   reducers: {
     getMovies: (name) => name,
@@ -17,13 +18,17 @@ const movieSlice = createSlice({
       const movie = action.payload;
       state.movie = movie;
     },
+    getNextSetMovie: (searchTerms) => searchTerms,
     resetMovie: (state) => {
       state.movie = Object.assign({}, {})
+    },
+    setMovieName: (state, action) => {
+      state.name = action.payload;
     }
   },
 })
 
-export const { getMovies, setMovies, getMovie, setMovie, resetMovie } = movieSlice.actions
+export const { getMovies, setMovies, getMovie, setMovie, resetMovie, getNextSetMovie, setMovieName } = movieSlice.actions
 
 export const movieReducer = movieSlice.reducer
 
