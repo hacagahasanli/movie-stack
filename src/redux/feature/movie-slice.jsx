@@ -5,13 +5,15 @@ const movieSlice = createSlice({
   initialState: {
     moviesList: [],
     movie: {},
-    name: "santa"
+    name: "santa",
+    error: {}
   },
   reducers: {
     getMovies: (name) => name,
     setMovies: (state, action) => {
       const movies = action.payload;
-      if (Array.isArray(movies)) state.moviesList = [...movies];
+      Array.isArray(movies) ? state.moviesList = [...movies]
+        : state.error = Object.assign({}, movies)
     },
     getMovie: (id) => id,
     setMovie: (state, action) => {

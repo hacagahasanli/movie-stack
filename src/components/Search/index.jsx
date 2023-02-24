@@ -7,22 +7,29 @@ export const Search = () => {
   return (
     <Container>
       <CheckboxContainer>
-        <p>Search on <span>change</span></p>
-        <ToggleInput id="toggle" type='checkbox' onClick={() => setType(!type)} />
-        <ToggleLabel htmlFor="toggle" />
+        <ToggleContainer>
+          <p>Search on <span>change</span></p>
+          <ToggleInput id="toggle" type='checkbox' onClick={() => setType(!type)} />
+          <ToggleLabel htmlFor="toggle" />
+        </ToggleContainer>
       </CheckboxContainer>
       <SearchInput {...{ type }} />
     </Container>
   )
 }
 
+const ToggleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 const CheckboxContainer = styled.div`
   width: 205px;
   height: 42px;
   margin: auto;
   margin-left:0.1rem;
   display: flex;
-  justify-content: center;
+  justify-content: spce;
   align-items: center;
   p{
     max-width: 80px;
@@ -37,18 +44,19 @@ const CheckboxContainer = styled.div`
 `
 const ToggleLabel = styled.label`
   width: 75px;
-  height: 42px;
+  height: 38px;
   background: #ccc;
   position: relative;
   display: inline-block;
   border-radius: 46px;
   transition: 0.4s;
   box-sizing: border-box;
+  top:0.2rem;
   &:after {
     content: '';
     position: absolute;
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     border-radius: 100%;
     left: 0;
     top: 0;

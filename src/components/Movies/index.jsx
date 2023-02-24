@@ -11,6 +11,7 @@ import { Card, CardMedia, Grid, CardContent, Typography } from "@mui/material"
 const Movies = () => {
   const dispatch = useDispatch()
   const [page, setPage] = useState(2)
+
   const { name } = useSelector(state => state.movie)
   const { moviesList } = useSelector((state) => state.movie)
 
@@ -18,12 +19,10 @@ const Movies = () => {
     from: { opacity: 0, transform: 'translate3d(0, 30px, 0)' },
     to: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
     config: { mass: 1, tension: 500, friction: 35 },
-    delay: 1200,
+    delay: 300,
   });
 
-  useEffect(() => {
-    setPage(2)
-  }, [name])
+  useEffect(() => setPage(2), [name])
 
   const nextPageHandler = () => {
     dispatch(getNextSetMovie({ movieName: name, page: page }))
@@ -35,7 +34,7 @@ const Movies = () => {
     <Grid item xs={9}>
       <Grid container justifyContent="center">
         {trail?.map((style, index) =>
-          <animated.div key={`${moviesList[index].Title}+_${index}`} style={style}>
+          <animated.div key={moviesList[index].id} style={style}>
             <MovieItem key={moviesList[index].Title} movie={moviesList[index]} />
           </animated.div>
         )}

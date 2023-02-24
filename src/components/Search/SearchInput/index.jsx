@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getMovies } from "../../../redux"
 import styled, { keyframes } from "styled-components"
@@ -7,17 +7,14 @@ import { setMovieName } from "../../../redux/feature/movie-slice"
 export const SearchInput = ({ type }) => {
     const dispatch = useDispatch()
     const [value, setValue] = useState("")
-    const ref = useRef()
-    // let timeoutId = null;
-    const { moviesList: { data } } = useSelector((state) => state.movie)
 
-    const searchMovieHandler = () => !type && dispatch(getMovies(ref.current.value))
+    const searchMovieHandler = () => !type && dispatch(getMovies(value))
 
-    const handler = (value) => type && dispatch(getMovies(value))
+    const debounceHandler = (value) => type && dispatch(getMovies(value))
 
     useEffect(() => {
         dispatch(setMovieName(value))
-        const timeoutId = setTimeout(() => handler(value), 450)
+        const timeoutId = setTimeout(() => debounceHandler(value), 450)
 
         return () => clearTimeout(timeoutId)
     }, [value])
@@ -33,7 +30,6 @@ export const SearchInput = ({ type }) => {
                 <Input
                     type="text"
                     fullWidth
-                    // ref={ref}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />
@@ -41,7 +37,6 @@ export const SearchInput = ({ type }) => {
                     <ButtonTop onClick={searchMovieHandler}>Button</ButtonTop>
                 </Button>
             </FormElements>
-            {data?.Error && <p className={errorMessage}>{data.Error}</p>}
         </FormContainer>
     </>
 }
