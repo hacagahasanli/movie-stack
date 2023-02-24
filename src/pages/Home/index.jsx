@@ -1,12 +1,15 @@
 import { useSelector } from "react-redux";
-import { Search } from "../../components";
+import { NotFound, Search } from "../../components";
 import Movies from "../../components/Movies";
 
 const Home = () => {
-  const { error } = useSelector(state => state.movie)
+  const { error: { toManyResult } } = useSelector(state => state.movie)
+
+  const visibleComponent = toManyResult ? <NotFound error={toManyResult} /> : <Movies />
+
   return <>
     <Search />
-    {error?.Error ? <h2>{error?.Error}</h2> : <Movies />}
+    {visibleComponent}
   </>
 };
 

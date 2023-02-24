@@ -1,19 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+const initialValue = {
+  toManyResult: "",
+  noMoreRelated: ""
+}
+
 const movieSlice = createSlice({
   name: "MovieReducer",
   initialState: {
     moviesList: [],
     movie: {},
     name: "santa",
-    error: {}
+    error: initialValue,
+    page: 1
   },
   reducers: {
     getMovies: (name) => name,
     setMovies: (state, action) => {
-      const movies = action.payload;
-      Array.isArray(movies) ? state.moviesList = [...movies]
-        : state.error = Object.assign({}, movies)
+      const { data, errorType } = action.payload;
+      if (Array.isArray(data)) {
+        state.moviesList = [...data]
+        state.error = Object.assign({}, initialValue)
+      }
+      else state.error[errorType] = data?.Error
     },
     getMovie: (id) => id,
     setMovie: (state, action) => {

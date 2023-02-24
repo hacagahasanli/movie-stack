@@ -7,7 +7,7 @@ function* GetMoviesAsync({ payload }) {
     const movieName = payload
     const response = yield call(fetchMovies, movieName)
     const data = response?.data?.Search ?? response?.data
-    if (response.status === 200) yield put(setMovies(data))
+    if (response.status === 200) yield put(setMovies({ data, errorType: "toManyResult" }))
   } catch (error) {
     console.log(error, "error")
   }
@@ -27,8 +27,8 @@ function* GetNextSetMovieAsync({ payload }) {
   try {
     const movieTerm = payload
     const response = yield call(getNextMovieSet, movieTerm)
-    const data = response?.data?.Search
-    if (response.status === 200) yield put(setMovies(data))
+    const data = response?.data?.Search ?? response?.data
+    if (response.status === 200) yield put(setMovies({ data, errorType: "noMoreRelated" }))
   } catch (error) {
     console.log(error, "error",)
   }

@@ -14,3 +14,5 @@ export const fetchMovie = async (movieId) =>
 
 export const getNextMovieSet = async ({ movieName, page }) =>
   axios.get(`${baseURL}/?apikey=${apiKey}&s=${movieName}&page=${page}`)
+
+// http://www.omdbapi.com/?apikey=${apiKey}&type=movie&r=json&plot=short&page=${Math.floor(Math.random() * 100) + 1}

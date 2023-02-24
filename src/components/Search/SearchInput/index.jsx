@@ -124,7 +124,7 @@ const Title = styled.h2`
   line-height: 1.25rem;
   margin-bottom: 0.15rem;
   font-size: 2rem;
-  color: #ffffff;
+  color: #c1c1c1;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
 	-webkit-animation: ${trackingExpand} 2.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) alternate forwards;
 	animation: ${trackingExpand} 2.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) alternate forwards;

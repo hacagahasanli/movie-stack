@@ -6,14 +6,15 @@ import noImage from "../../assets/images/noImage.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { getNextSetMovie } from "../../redux/feature/movie-slice";
 import { Card, CardMedia, Grid, CardContent, Typography } from "@mui/material"
+import { NotFound } from "../NotFound";
 
 
 const Movies = () => {
   const dispatch = useDispatch()
-  const [page, setPage] = useState(2)
+  const [page, setPage] = useState(1)
 
   const { name } = useSelector(state => state.movie)
-  const { moviesList } = useSelector((state) => state.movie)
+  const { moviesList, error: { noMoreRelated } } = useSelector((state) => state.movie)
 
   const trail = useTrail(moviesList?.length, {
     from: { opacity: 0, transform: 'translate3d(0, 30px, 0)' },
@@ -22,25 +23,33 @@ const Movies = () => {
     delay: 300,
   });
 
-  useEffect(() => setPage(2), [name])
+  useEffect(() => {
+    console.log("BURA DAXIL OLMAQ")
+    setPage(1)
+  }, [name])
 
-  const nextPageHandler = () => {
+  useEffect(() => {
+    console.log("BURA DAXIL OLMAq YENIDEN");
     dispatch(getNextSetMovie({ movieName: name, page: page }))
-    setPage((prevPage) => prevPage + 1)
-  }
+  }, [page])
 
   return <Grid sx={{ flexGrow: 1, position: "relative" }} justifyContent="center" container>
-    <NextMovie onClick={nextPageHandler}>Next Page</NextMovie>
-    <Grid item xs={9}>
-      <Grid container justifyContent="center">
-        {trail?.map((style, index) =>
-          <animated.div key={moviesList[index].id} style={style}>
-            <MovieItem key={moviesList[index].Title} movie={moviesList[index]} />
-          </animated.div>
-        )}
-      </Grid>
-    </Grid>
-  </Grid>
+    <NextMovie onClick={() => setPage(page + 1)}>Next Page</NextMovie>
+    <PrevMovie onClick={() => page >= 2 && setPage(page - 1)}>Previos Page</PrevMovie>
+    {
+      noMoreRelated ? <NotFound error={noMoreRelated} /> :
+        <Grid item xs={9}>
+          <Grid container justifyContent="center">
+            {trail?.map((style, index) =>
+              <animated.div key={moviesList[index].id} style={style}>
+                <MovieItem key={moviesList[index].Title} movie={moviesList[index]} />
+              </animated.div>
+            )}
+          </Grid>
+        </Grid>
+    }
+  </Grid >
+
 }
 
 const MovieItem = ({ movie }) => {
@@ -63,13 +72,8 @@ const MovieItem = ({ movie }) => {
 
 export default Movies
 
-const NextMovie = styled.span`
-  position: fixed;
-  right: 1rem;
-  z-index: 10;
-  bottom: 2.2%;
-  margin: auto; 
-  max-width: 10rem; 
+const BottonStyle = styled.span`
+ max-width: 10rem; 
   padding: 0.46rem 1.5rem;
   border-radius: 0.4rem;
   color: white;
@@ -79,8 +83,34 @@ const NextMovie = styled.span`
   letter-spacing: 2px;
   /* background:#e8e8e8; */
   cursor:pointer;
+  z-index: 10;
+  margin: auto;
+  bottom: 2.2%;
+  position: fixed;
+
+
 `
 
+const NextMovie = styled(BottonStyle)`
+  right: 1rem;
+`
+
+const PrevMovie = styled(BottonStyle)`
+  left:1rem
+`
+
+
+  // const nextPageHandler = () => {
+  //   dispatch(getNextSetMovie({ movieName: name, page: page + 1 }))
+  //   setPage((prevPage) => prevPage + 1)
+  // }
+
+  // const prevPageHandler = () => {
+  //   if (page >= 2) {
+  //     dispatch(getNextSetMovie({ movieName: name, page: page - 1 }))
+  //     setPage((prevPage) => prevPage - 1)
+  //   }
+  // }
 // useEffect(() => {
   // fetch(`http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${category}&api_key=${apiKey}&format=json`)
   //   .then(response => response.json())
