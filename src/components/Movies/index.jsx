@@ -30,7 +30,7 @@ const Movies = () => {
 
   useEffect(() => {
     isMounted.current ?
-      dispatch(getNextSetMovie({ movieName: name, page: page })) 
+      dispatch(getNextSetMovie({ movieName: name, page: page }))
       : isMounted.current = true
   }, [page])
 
@@ -63,8 +63,8 @@ const MovieItem = ({ movie }) => {
       <Link to={`/movie/${imdbID}`}>
         <CardMedia component="img" height="350" image={poster} alt={Title} />
         <CardContent sx={{ textAlign: 'center' }}>
-          <Typography style={{ fontWeight: 700 }} variant="body2" color="RGB(26, 26, 26)">{Title}</Typography>
-          <Typography style={{ fontWeight: 700 }} color="text.primary">{Year}</Typography>
+          <Typography style={{ fontWeight: 700, textDecoration: "none" }} variant="body2" color="RGB(26, 26, 26)" underline="none">{Title}</Typography>
+          <Typography style={{ fontWeight: 700 }} color="text.primary" underline="none">{Year}</Typography>
         </CardContent>
       </Link>
     </Card>

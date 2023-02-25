@@ -60,14 +60,14 @@ const FormContainer = styled.form`
 const Input = styled.input`
     font-family: -apple - system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans - serif;
     font-weight: 500;
-    font-size: .8vw;
+    font-size: 1.3rem;
     color: #fff;
     background-color: rgb(28, 28, 30);
     box-shadow: 0 0 .4vw rgba(0, 0, 0, 0.5), 0 0 0 .15vw transparent;
     border-radius: 0.4vw;
     border: none;
     outline: none;
-    padding: 0.9vw;
+    padding: .93rem;
     min-width: 240px;
     max-width: 250px;
     transition: .4s;

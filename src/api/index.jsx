@@ -27,19 +27,16 @@ export const fetchMovie = async (movieId) => await axiosInstance.get(`/?i=${movi
   model: "getDetailsByMovieId"
 });
 
-export const getNextMovieSet = async ({ movieName, page }) =>
-  axiosInstance.get(`/?apikey=${apiKey}&s=${movieName}&page=${page}`, { model: "nextMovieSet" }, {
+export const getNextMovieSet = async ({ movieName, page }) => await axiosInstance.get(`/?apikey=${apiKey}&s=${movieName}&page=${page}`, { model: "nextMovieSet" }, {
     model: 'nextMovieSet'
   })
 
 
 axiosInstance.interceptors.response.use(
   response => {
-    if (models?.sameFuncModels[response.config.model]) {
-      if (response.status === 200) {
-        const data = response?.data?.Search ?? response?.data
-        return data
-      }
+    if (models?.sameFuncModels[response.config.model] && response.status === 200) {
+      const data = response?.data?.Search ?? response?.data
+      return data
     }
     return response
   },
