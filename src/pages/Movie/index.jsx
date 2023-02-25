@@ -25,10 +25,12 @@ export const Movie = () => {
     position: "absolute",
     bottom: "0.35rem",
     padding: "0.6rem 1.5rem",
-    fontWeight: 600
+    fontWeight: 600,
+    position: "absolute",
+    right: 0,
   }
 
-  if (Array.isArray(Ratings)) rating = Ratings[0].Value
+  if (Array.isArray(Ratings)) rating = Ratings[0].Value;
 
   useEffect(() => {
     if (id) dispatch(getMovie(id))
@@ -85,7 +87,6 @@ export const Movie = () => {
       component: "h6",
       id: "rating"
     },
-
   ]
 
   return (
@@ -103,10 +104,10 @@ export const Movie = () => {
                     {value}
                   </Typography>
                 )}
-                <Button style={buttonStyle} onClick={goBackHandler}>
-                  Go Back
-                </Button>
               </div>
+              <Button style={buttonStyle} onClick={goBackHandler}>
+                Go Back
+              </Button>
             </>
             :
             <Loading>
@@ -127,7 +128,6 @@ const Loading = styled.div`
   justify-content: center;
   align-items: center;
 `
-
 const Image = styled.img`
   width: 100%;
   border-radius: 4px;
