@@ -37,12 +37,11 @@ axiosInstance.interceptors.response.use(
   response => {
     if (models?.sameFuncModels[response.config.model]) {
       if (response.status === 200) {
-        console.log("BURA DAXIL OLDUM NARAHAT OLMA GINEN");
         const data = response?.data?.Search ?? response?.data
         return data
       }
     }
-
+    return response
   },
   error => {
     console.error(`Error received for ${error.config.url}: ${error.message}`);
