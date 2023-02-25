@@ -17,12 +17,12 @@ const movieSlice = createSlice({
   reducers: {
     getMovies: (name) => name,
     setMovies: (state, action) => {
-      const { data, errorType } = action.payload;
-      if (Array.isArray(data)) {
-        state.moviesList = [...data]
+      const { response, errorType } = action.payload;
+      if (Array.isArray(response)) {
+        state.moviesList = [...response]
         state.error = Object.assign({}, initialValue)
       }
-      else state.error[errorType] = data?.Error
+      else state.error[errorType] = response?.Error
     },
     getMovie: (id) => id,
     setMovie: (state, action) => {

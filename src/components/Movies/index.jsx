@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTrail, animated } from 'react-spring';
 import noImage from "../../assets/images/noImage.jpg"
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import { NotFound } from "../NotFound";
 const Movies = () => {
   const dispatch = useDispatch()
   const [page, setPage] = useState(1)
+  const isMounted = useRef(false);
 
   const { name } = useSelector(state => state.movie)
   const { moviesList, error: { noMoreRelated } } = useSelector((state) => state.movie)
@@ -24,13 +25,13 @@ const Movies = () => {
   });
 
   useEffect(() => {
-    console.log("BURA DAXIL OLMAQ")
     setPage(1)
   }, [name])
 
   useEffect(() => {
-    console.log("BURA DAXIL OLMAq YENIDEN");
-    dispatch(getNextSetMovie({ movieName: name, page: page }))
+    isMounted.current ?
+      dispatch(getNextSetMovie({ movieName: name, page: page })) 
+      : isMounted.current = true
   }, [page])
 
   return <Grid sx={{ flexGrow: 1, position: "relative" }} justifyContent="center" container>
