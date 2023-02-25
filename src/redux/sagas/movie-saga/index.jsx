@@ -24,6 +24,7 @@ function* GetMovieAsync({ payload }) {
 
 function* GetNextSetMovieAsync({ payload }) {
   try {
+    console.log(payload, "PAYLOAD");
     const movieTerm = payload
     const response = yield call(getNextMovieSet, movieTerm)
     yield put(setMovies({ response, errorType: "noMoreRelated" }))

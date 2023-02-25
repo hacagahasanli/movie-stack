@@ -122,7 +122,6 @@ const StyledButton = styled(Button)`
   }
 
 `
-
 const MobileDiv = styled.div`
   display: flex;
   gap:2rem;
@@ -132,14 +131,12 @@ const MobileDiv = styled.div`
       margin: auto;
   }
 `
-
 const Details = styled.div`
  @media screen and (max-width:768px){
       max-width:300px;
   }
 
 `
-
 const Loading = styled.div`
   width: 100%;
   min-height: 400px;

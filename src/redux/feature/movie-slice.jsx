@@ -10,7 +10,7 @@ const movieSlice = createSlice({
   initialState: {
     moviesList: [],
     movie: {},
-    name: "",
+    name: "santa",
     error: initialValue,
     page: 1
   },

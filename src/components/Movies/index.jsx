@@ -29,8 +29,7 @@ const Movies = () => {
   }, [name])
 
   useEffect(() => {
-    if (isMounted.current) dispatch(getNextSetMovie({ movieName: name, page: page }))
-    else if (page !== 1) isMounted.current = true
+    dispatch(getNextSetMovie({ movieName: name, page: page }))
   }, [page])
 
   return <Grid sx={{ flexGrow: 1, position: "relative" }} justifyContent="center" container>

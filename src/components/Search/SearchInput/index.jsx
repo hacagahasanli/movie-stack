@@ -6,7 +6,7 @@ import { setMovieName } from "../../../redux/feature/movie-slice"
 
 export const SearchInput = ({ type }) => {
     const dispatch = useDispatch()
-    const [value, setValue] = useState("")
+    const [value, setValue] = useState("santa")
 
     const searchMovieHandler = () => !type && dispatch(getMovies(value))
 
@@ -18,10 +18,6 @@ export const SearchInput = ({ type }) => {
 
         return () => clearTimeout(timeoutId)
     }, [value])
-
-    useEffect(() => {
-        dispatch(getMovies("santa"))
-    }, [])
 
     return <>
         <Title>Search Fav Movie App</Title>
