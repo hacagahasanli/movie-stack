@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMovie, resetMovie } from "../../redux/feature/movie-slice";
 
-const customColor = "rgb(229, 9, 20)";
 export const Movie = () => {
   const dispatch = useDispatch()
   const { movie } = useSelector((state) => state.movie)
@@ -18,17 +17,6 @@ export const Movie = () => {
   const { Poster, Title, Year, Plot, Director, Released, Actors, Writer, Ratings } = movie
   let image = noImage;
   let rating = null;
-
-  const buttonStyle = {
-    background: customColor,
-    color: "#cfcccc",
-    position: "absolute",
-    bottom: "0.35rem",
-    padding: "0.6rem 1.5rem",
-    fontWeight: 600,
-    position: "absolute",
-    right: 0,
-  }
 
   if (Array.isArray(Ratings)) rating = Ratings[0].Value;
 
@@ -49,7 +37,7 @@ export const Movie = () => {
       variant: "h3",
       component: "h3",
       id: "title",
-      color: customColor
+      color: "rgb(229, 9, 20)"
     },
     {
       value: `${Year}`,
@@ -94,21 +82,21 @@ export const Movie = () => {
       <section className={styles.section}>
         {
           Object.keys(movie).length !== 0 ?
-            <>
+            <MobileDiv>
               <div>
                 <Image src={image} alt={Title} />
               </div>
-              <div>
+              <Details>
                 {movieDetails?.map(({ value, variant, component, id, color = "#c0c0c0" }) =>
                   <Typography key={id} align="left" gutterBottom {...{ variant, component, color }} >
                     {value}
                   </Typography>
                 )}
-              </div>
-              <Button style={buttonStyle} onClick={goBackHandler}>
+              </Details>
+              <StyledButton onClick={goBackHandler}>
                 Go Back
-              </Button>
-            </>
+              </StyledButton>
+            </MobileDiv>
             :
             <Loading>
               <span>Loading...</span>
@@ -118,6 +106,39 @@ export const Movie = () => {
     </ErrorBoundary >
   )
 };
+
+const StyledButton = styled(Button)`
+  background: rgb(229, 9, 20) !important;
+  color: #cfcccc !important;
+  bottom: 0.35rem !important;
+  padding: 0.6rem 1.5rem !important;
+  font-weight: 600 !important;
+  position: absolute !important;
+  right: 0 !important;
+
+ @media screen and (max-width:768px){
+      position: relative !important;
+      padding: 0.4rem 1.2rem !important;
+  }
+
+`
+
+const MobileDiv = styled.div`
+  display: flex;
+  gap:2rem;
+  @media screen and (max-width:768px){
+      align-items: center;
+      flex-direction: column;
+      margin: auto;
+  }
+`
+
+const Details = styled.div`
+ @media screen and (max-width:768px){
+      max-width:300px;
+  }
+
+`
 
 const Loading = styled.div`
   width: 100%;
@@ -129,7 +150,8 @@ const Loading = styled.div`
   align-items: center;
 `
 const Image = styled.img`
-  width: 100%;
+  max-width: 100%;
+  min-width: 300px;
   border-radius: 4px;
 `
 export default Movie;

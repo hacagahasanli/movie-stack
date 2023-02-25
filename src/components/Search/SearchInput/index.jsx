@@ -72,6 +72,12 @@ const Input = styled.input`
     &:focus {
         box-shadow: 0 0 0 .15vw rgba(153, 208, 229, 0.186);
     }
+
+    @media screen and (max-width:768px){
+        min-width: 180px;
+        max-width: 200px;
+        padding: .63rem;
+    }
 `
 const FormElements = styled.div`
     display: flex;
@@ -90,6 +96,9 @@ const ButtonTop = styled.span`
     cursor: pointer;
     &:hover {
         box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+    }
+    @media screen and (max-width:768px){
+        padding: 0.65em 1.1em;
     }
 
 `
@@ -122,5 +131,9 @@ const Title = styled.h2`
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
 	-webkit-animation: ${trackingExpand} 2.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) alternate forwards;
 	animation: ${trackingExpand} 2.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) alternate forwards;
+
+   @media screen and (max-width:768px){
+    font-size: 1.4rem;
+   }
 
 `

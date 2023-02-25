@@ -41,6 +41,16 @@ const CheckboxContainer = styled.div`
       letter-spacing: 3.8px;
     }
   }
+
+     @media screen and (max-width:768px){
+     width: 75px;
+
+     p{
+          max-width: 70px;
+        font-size:12px;
+        margin-bottom: 0.5rem;
+     }
+    }
 `
 const ToggleLabel = styled.label`
   width: 75px;
@@ -65,6 +75,16 @@ const ToggleLabel = styled.label`
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     transition: 0.4s;
   }
+    @media screen and (max-width:768px){
+    width: 55px;
+    height: 28px;
+
+    &:after{
+      width: 28px;
+      height: 28px;
+    }
+  }
+  
 `
 const ToggleInput = styled.input`
   position: absolute;
@@ -78,6 +98,15 @@ const ToggleInput = styled.input`
     &:after{
       left: 40px;
     }
+  }
+
+  @media screen and (max-width:768px){
+      &:checked + ${ToggleLabel}{
+    background-color: #0f0f0f;
+    &:after{
+      left: 30px;
+    }
+  }
   }
 `
 const Container = styled.div`

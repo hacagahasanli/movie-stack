@@ -13,7 +13,7 @@ const Movies = () => {
   const dispatch = useDispatch()
   const [page, setPage] = useState(1)
   const isMounted = useRef(false);
-
+  const showPage = window.innerWidth > 768 ? "Page" : "";
   const { name } = useSelector(state => state.movie)
   const { moviesList, error } = useSelector((state) => state.movie)
 
@@ -34,8 +34,8 @@ const Movies = () => {
   }, [page])
 
   return <Grid sx={{ flexGrow: 1, position: "relative" }} justifyContent="center" container>
-    <NextMovie onClick={() => setPage(page + 1)}>Next Page</NextMovie>
-    <PrevMovie onClick={() => page >= 2 && setPage(page - 1)}>Previous Page</PrevMovie>
+    <NextMovie onClick={() => setPage(page + 1)}>{`Next ${showPage}`}</NextMovie>
+    <PrevMovie onClick={() => page >= 2 && setPage(page - 1)}>{`Prev ${showPage}`}</PrevMovie>
     {
       error?.noMoreRelated ? <NotFound error={error?.noMoreRelated} /> :
         <Grid item xs={9}>
@@ -94,13 +94,32 @@ const BottonStyle = styled.span`
   bottom: 2.2%;
   position: fixed;
 
+  @media screen and (max-width:768px){
+    padding: 0;
+    min-width:80px;
+    min-height:80px;
+    font-size:0.9rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 42%;
+    margin-bottom:-.5rem;
+  }
 
 `
 const NextMovie = styled(BottonStyle)`
   right: 1rem;
+  @media screen and (max-width:768px){
+    right:1rem;
+  }
+  
 `
 const PrevMovie = styled(BottonStyle)`
-  left:1rem
+  left:1rem;
+  @media screen and (max-width:768px){
+    left:.84rem;
+  }
 `
 
 
