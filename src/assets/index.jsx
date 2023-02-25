@@ -1,3 +1,3 @@
-import noImage from "./images/noImage.jpg"
+import noImage from "./images/noImage.jpg";
 
-export { noImage }
+export { noImage };

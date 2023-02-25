@@ -1,57 +1,63 @@
-import React, { useState } from "react"
-import { SearchInput } from "./SearchInput"
-import styled from "styled-components"
+import React, { useState } from "react";
+import { SearchInput } from "./SearchInput";
+import styled from "styled-components";
 
 export const Search = () => {
-  const [type, setType] = useState(false)
+  const [type, setType] = useState(false);
   return (
     <Container>
       <CheckboxContainer>
         <ToggleContainer>
-          <p>Search on <span>change</span></p>
-          <ToggleInput id="toggle" type='checkbox' onClick={() => setType(!type)} />
+          <p>
+            Search on <span>change</span>
+          </p>
+          <ToggleInput
+            id="toggle"
+            type="checkbox"
+            onClick={() => setType(!type)}
+          />
           <ToggleLabel htmlFor="toggle" />
         </ToggleContainer>
       </CheckboxContainer>
       <SearchInput {...{ type }} />
     </Container>
-  )
-}
+  );
+};
 
 const ToggleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 const CheckboxContainer = styled.div`
   width: 205px;
   height: 42px;
   margin: auto;
-  margin-left:0.1rem;
+  margin-left: 0.1rem;
   display: flex;
   justify-content: spce;
   align-items: center;
-  p{
+  p {
     max-width: 80px;
     word-wrap: break-word;
-    color:white;
+    color: white;
     font-weight: 700;
 
-    span{
+    span {
       letter-spacing: 3.8px;
     }
   }
 
-     @media screen and (max-width:768px){
-     width: 75px;
+  @media screen and (max-width: 768px) {
+    width: 75px;
 
-     p{
-          max-width: 70px;
-        font-size:12px;
-        margin-bottom: 0.5rem;
-     }
+    p {
+      max-width: 70px;
+      font-size: 12px;
+      margin-bottom: 0.5rem;
     }
-`
+  }
+`;
 const ToggleLabel = styled.label`
   width: 75px;
   height: 38px;
@@ -61,9 +67,9 @@ const ToggleLabel = styled.label`
   border-radius: 46px;
   transition: 0.4s;
   box-sizing: border-box;
-  top:0.2rem;
+  top: 0.2rem;
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 38px;
     height: 38px;
@@ -75,17 +81,16 @@ const ToggleLabel = styled.label`
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     transition: 0.4s;
   }
-    @media screen and (max-width:768px){
+  @media screen and (max-width: 768px) {
     width: 55px;
     height: 28px;
 
-    &:after{
+    &:after {
       width: 28px;
       height: 28px;
     }
   }
-  
-`
+`;
 const ToggleInput = styled.input`
   position: absolute;
   left: 0;
@@ -93,24 +98,24 @@ const ToggleInput = styled.input`
   opacity: 0;
   cursor: pointer;
 
-  &:checked + ${ToggleLabel}{
+  &:checked + ${ToggleLabel} {
     background-color: #0f0f0f;
-    &:after{
+    &:after {
       left: 40px;
     }
   }
 
-  @media screen and (max-width:768px){
-      &:checked + ${ToggleLabel}{
-    background-color: #0f0f0f;
-    &:after{
-      left: 30px;
+  @media screen and (max-width: 768px) {
+    &:checked + ${ToggleLabel} {
+      background-color: #0f0f0f;
+      &:after {
+        left: 30px;
+      }
     }
   }
-  }
-`
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
