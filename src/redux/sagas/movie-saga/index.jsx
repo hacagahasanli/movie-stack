@@ -32,11 +32,9 @@ function* GetNextSetMovieAsync({ payload }) {
   }
 }
 
-
 function* GetNextSetMovie() {
   yield takeLatest(getNextSetMovie, GetNextSetMovieAsync)
 }
-
 
 function* GetMovies() {
   yield takeLatest(getMovies, GetMoviesAsync)

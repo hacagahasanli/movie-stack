@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 const models = {
   sameFuncModels: {
     firstRenderMovies: "firstRenderMovies",
-    nextMovieSet: "nextMovieSet"
+    nextMovieSet: "nextMovieSet",
   },
   getDetailsByMovieId: "getDetailsByMovieId",
 }
@@ -28,22 +28,19 @@ export const fetchMovie = async (movieId) => await axiosInstance.get(`/?i=${movi
 });
 
 export const getNextMovieSet = async ({ movieName, page }) => await axiosInstance.get(`/?apikey=${apiKey}&s=${movieName}&page=${page}`, { model: "nextMovieSet" }, {
-    model: 'nextMovieSet'
-  })
-
+  model: 'nextMovieSet'
+})
 
 axiosInstance.interceptors.response.use(
   response => {
-    if (models?.sameFuncModels[response.config.model] && response.status === 200) {
+    if (response.status !== 200) return new Error("Something went wrong!")
+    if (models?.sameFuncModels[response.config.model]) {
       const data = response?.data?.Search ?? response?.data
       return data
     }
     return response
   },
   error => {
-    console.error(`Error received for ${error.config.url}: ${error.message}`);
     return Promise.reject(error);
   }
 );
-
-// http://www.omdbapi.com/?apikey=${apiKey}&type=movie&r=json&plot=short&page=${Math.floor(Math.random() * 100) + 1}

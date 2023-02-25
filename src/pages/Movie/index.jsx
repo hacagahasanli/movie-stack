@@ -15,8 +15,10 @@ export const Movie = () => {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const { Poster, Title, Year, Plot, Director, Ratings, Released, Actors, Writer, Country } = movie
+  const { Poster, Title, Year, Plot, Director, Released, Actors, Writer, Ratings } = movie
   let image = noImage;
+  let rating = null;
+
   const buttonStyle = {
     background: customColor,
     color: "#cfcccc",
@@ -25,6 +27,8 @@ export const Movie = () => {
     padding: "0.6rem 1.5rem",
     fontWeight: 600
   }
+
+  if (Array.isArray(Ratings)) rating = Ratings[0].Value
 
   useEffect(() => {
     if (id) dispatch(getMovie(id))
@@ -67,7 +71,7 @@ export const Movie = () => {
       value: `Actors : ${Actors}`,
       variant: "h6",
       component: "h6",
-      id: "rating"
+      id: "actors"
     },
     {
       value: `Director : ${Director}`,
@@ -76,17 +80,12 @@ export const Movie = () => {
       id: "director"
     },
     {
-      // value: Ratings["0"]?.Value,
+      value: rating,
       variant: "h6",
       component: "h6",
       id: "rating"
     },
-    {
-      value: `Writer : ${Writer}`,
-      variant: "h6",
-      component: "h6",
-      id: "rating"
-    },
+
   ]
 
   return (

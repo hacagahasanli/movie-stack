@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { getMovies } from "../../../redux"
 import styled, { keyframes } from "styled-components"
 import { setMovieName } from "../../../redux/feature/movie-slice"
@@ -40,12 +40,6 @@ export const SearchInput = ({ type }) => {
         </FormContainer>
     </>
 }
-
-// useEffect(() => {
-//     fetch(`http://www.omdbapi.com/?apikey=${"e7ebf3a9"}&s=${"spider"}&page=${3}`)
-//         .then((response) => response.json())
-//         .then((data) => console.log(data))
-// }, [])
 
 const FormContainer = styled.form`
     width: 90vw;

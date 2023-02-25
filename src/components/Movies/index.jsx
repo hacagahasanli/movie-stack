@@ -15,7 +15,7 @@ const Movies = () => {
   const isMounted = useRef(false);
 
   const { name } = useSelector(state => state.movie)
-  const { moviesList, error: { noMoreRelated } } = useSelector((state) => state.movie)
+  const { moviesList, error } = useSelector((state) => state.movie)
 
   const trail = useTrail(moviesList?.length, {
     from: { opacity: 0, transform: 'translate3d(0, 30px, 0)' },
@@ -29,16 +29,15 @@ const Movies = () => {
   }, [name])
 
   useEffect(() => {
-    isMounted.current ?
-      dispatch(getNextSetMovie({ movieName: name, page: page }))
-      : isMounted.current = true
+    if (isMounted.current) dispatch(getNextSetMovie({ movieName: name, page: page }))
+    else if (page !== 1) isMounted.current = true
   }, [page])
 
   return <Grid sx={{ flexGrow: 1, position: "relative" }} justifyContent="center" container>
     <NextMovie onClick={() => setPage(page + 1)}>Next Page</NextMovie>
-    <PrevMovie onClick={() => page >= 2 && setPage(page - 1)}>Previos Page</PrevMovie>
+    <PrevMovie onClick={() => page >= 2 && setPage(page - 1)}>Previous Page</PrevMovie>
     {
-      noMoreRelated ? <NotFound error={noMoreRelated} /> :
+      error?.noMoreRelated ? <NotFound error={error?.noMoreRelated} /> :
         <Grid item xs={9}>
           <Grid container justifyContent="center">
             {trail?.map((style, index) =>
@@ -54,25 +53,31 @@ const Movies = () => {
 }
 
 const MovieItem = ({ movie }) => {
-
   const { imdbID, Poster, Title, Year } = movie
   const poster = Poster.substring(0, 4) === "http" ? Poster : noImage
 
   return <Grid key={imdbID} container item style={{ padding: "1rem" }}>
     <Card sx={{ width: "350", background: "#EBEBEB" }}>
-      <Link to={`/movie/${imdbID}`}>
+      <StyledLink to={`/movie/${imdbID}`}>
         <CardMedia component="img" height="350" image={poster} alt={Title} />
-        <CardContent sx={{ textAlign: 'center' }}>
-          <Typography style={{ fontWeight: 700, textDecoration: "none" }} variant="body2" color="RGB(26, 26, 26)" underline="none">{Title}</Typography>
-          <Typography style={{ fontWeight: 700 }} color="text.primary" underline="none">{Year}</Typography>
+        <CardContent>
+          <Typography style={{ fontWeight: 700, textDecoration: "none" }} variant="body2" color="RGB(26, 26, 26)">{Title}</Typography>
+          <Typography style={{ fontWeight: 700 }} color="text.primary">{Year}</Typography>
         </CardContent>
-      </Link>
+      </StyledLink>
     </Card>
   </Grid >
 }
 
 export default Movies
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
 const BottonStyle = styled.span`
  max-width: 10rem; 
   padding: 0.46rem 1.5rem;
@@ -91,11 +96,9 @@ const BottonStyle = styled.span`
 
 
 `
-
 const NextMovie = styled(BottonStyle)`
   right: 1rem;
 `
-
 const PrevMovie = styled(BottonStyle)`
   left:1rem
 `
