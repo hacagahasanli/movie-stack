@@ -3,7 +3,7 @@ import axios from "axios";
 const apiKey = "e7ebf3a9";
 
 const axiosInstance = axios.create({
-  baseURL: "http://www.omdbapi.com"
+  baseURL: "https://www.omdbapi.com"
 })
 
 // const baseURL = "http://www.omdbapi.com"
