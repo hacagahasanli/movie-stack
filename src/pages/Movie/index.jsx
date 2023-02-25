@@ -14,7 +14,7 @@ export const Movie = () => {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const { Poster, Title, Year, Plot, Director, Released, Actors, Writer, Ratings } = movie
+  const { Poster, Title, Year, Plot, Director, Released, Actors, Ratings } = movie
   let image = noImage;
   let rating = null;
 

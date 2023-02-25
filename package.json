@@ -22,7 +22,8 @@
     "react-router-dom": "^6.8.1",
     "react-spring": "^9.6.1",
     "redux-saga": "^1.2.2",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

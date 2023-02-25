@@ -6,10 +6,6 @@ const axiosInstance = axios.create({
   baseURL: "https://www.omdbapi.com"
 })
 
-// const baseURL = "http://www.omdbapi.com"
-// http://www.omdbapi.com/?i=tt3896198&apikey=e7ebf3a9&s=santa
-// const API_END_POINT = `http://www.omdbapi.com/?i=tt3896198&apikey=${apiKey}`;
-
 const models = {
   sameFuncModels: {
     firstRenderMovies: "firstRenderMovies",

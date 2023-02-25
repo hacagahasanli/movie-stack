@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useTrail, animated } from 'react-spring';
-import noImage from "../../assets/images/noImage.jpg"
 import { useDispatch, useSelector } from "react-redux";
 import { getNextSetMovie } from "../../redux/feature/movie-slice";
 import { Card, CardMedia, Grid, CardContent, Typography } from "@mui/material"
 import { NotFound } from "../NotFound";
+import { noImage } from "../../assets";
+import { v4 } from "uuid";
 
 
 const Movies = () => {
   const dispatch = useDispatch()
   const [page, setPage] = useState(1)
-  const isMounted = useRef(false);
   const showPage = window.innerWidth > 768 ? "Page" : "";
   const { name } = useSelector(state => state.movie)
   const { moviesList, error } = useSelector((state) => state.movie)
@@ -37,10 +37,10 @@ const Movies = () => {
     <PrevMovie onClick={() => page >= 2 && setPage(page - 1)}>{`Prev ${showPage}`}</PrevMovie>
     {
       error?.noMoreRelated ? <NotFound error={error?.noMoreRelated} /> :
-        <Grid item xs={9}>
+        <Grid item xs={9} >
           <Grid container justifyContent="center">
             {trail?.map((style, index) =>
-              <animated.div key={moviesList[index].id} style={style}>
+              <animated.div key={v4()} style={style}>
                 <MovieItem key={moviesList[index].Title} movie={moviesList[index]} />
               </animated.div>
             )}
@@ -120,58 +120,3 @@ const PrevMovie = styled(BottonStyle)`
     left:.84rem;
   }
 `
-
-
-  // const nextPageHandler = () => {
-  //   dispatch(getNextSetMovie({ movieName: name, page: page + 1 }))
-  //   setPage((prevPage) => prevPage + 1)
-  // }
-
-  // const prevPageHandler = () => {
-  //   if (page >= 2) {
-  //     dispatch(getNextSetMovie({ movieName: name, page: page - 1 }))
-  //     setPage((prevPage) => prevPage - 1)
-  //   }
-  // }
-// useEffect(() => {
-  // fetch(`http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=${category}&api_key=${apiKey}&format=json`)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     const tracks = data.tracks.track;
-  //     // Do something with the tracks
-  //   })
-  //   .catch(error => console.error(error));
-  // http://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=${apiKey}&limit=${limit}&format=json
-//   fetch(`http://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=${apiKey}&limit=${limit}&format=json`)
-//     .then(response => response.json())
-//     .then(data => {
-//       const tracks = data.results.trackmatches.track;
-//       console.log(tracks, "TRACKS");
-//       // Do something with the tracks
-//     })
-//     .catch(error => console.error(error));
-// }, [])
-
-// const apiKey = '66a6ed0c5bed492cdb27050deddffbad';
-// const query = 'despacito';
-// const limit = 10;\
-
-// function handleLoadMore() {
-//   // Make the API request to retrieve the next 5 tracks
-//   axios.get('http://ws.audioscrobbler.com/2.0/', {
-//     params: {
-//       method: 'chart.gettoptracks',
-//       api_key: 'YOUR_API_KEY',
-//       format: 'json',
-//       limit: 5,
-//       page: 2
-//     }
-//   })
-//     .then(response => {
-//       const data = response.data.tracks.track;
-//       setTracks(prevTracks => [...prevTracks, ...data]);
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     });
-// }
