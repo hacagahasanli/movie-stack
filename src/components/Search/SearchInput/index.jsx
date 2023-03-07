@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getMovies } from "../../../redux";
-import styled, { keyframes } from "styled-components";
-import { setMovieName } from "../../../redux/feature/movie-slice";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getMovies } from '../../../redux';
+import styled, { keyframes } from 'styled-components';
+import { setMovieName } from '../../../redux/feature/movie-slice';
 
 export const SearchInput = ({ type }) => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("santa");
+  const [value, setValue] = useState('santa');
 
   const searchMovieHandler = () => !type && dispatch(getMovies(value));
 
@@ -21,11 +21,11 @@ export const SearchInput = ({ type }) => {
 
   return (
     <>
-      <Title>Search Fav Movie App</Title>
+      <Title>MovieStack</Title>
       <FormContainer onSubmit={(e) => e.preventDefault()}>
         <FormElements>
           <Input
-            type="text"
+            type='text'
             fullWidth
             value={value}
             onChange={(e) => setValue(e.target.value)}
@@ -48,10 +48,13 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width: 358px) {
+    min-width: 100%;
+  }
 `;
 const Input = styled.input`
-  font-family: -apple - system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple - system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans - serif;
   font-weight: 500;
   font-size: 1.3rem;
@@ -78,11 +81,22 @@ const Input = styled.input`
     max-width: 200px;
     padding: 0.63rem;
   }
+  @media screen and (max-width: 358px) {
+    min-width: 100%;
+    padding: 0.63rem;
+    font-size: 0.8rem;
+    min-width: 240px;
+    max-width: 250px;
+  }
 `;
 const FormElements = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 358px) {
+    flex-direction: column;
+  }
 `;
 const ButtonTop = styled.span`
   display: block;
@@ -99,6 +113,7 @@ const ButtonTop = styled.span`
   }
   @media screen and (max-width: 768px) {
     padding: 0.65em 1.1em;
+    border-radius: 0.35em;
   }
 `;
 const Button = styled.button`
@@ -108,6 +123,15 @@ const Button = styled.button`
   border-radius: 0.75em;
   background: 0.75em;
   margin-left: 1rem;
+
+  @media screen and (max-width: 358px) {
+    width: 50%;
+    margin-right: 1rem;
+    padding: 0;
+    font-size: 12px;
+    border-radius: 0%;
+    margin-top: 0.7rem;
+  }
 `;
 const trackingExpand = keyframes`
    0% {
@@ -127,8 +151,8 @@ const Title = styled.h2`
   margin-bottom: 0.15rem;
   font-size: 2rem;
   color: #c1c1c1;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-animation: ${trackingExpand} 2.8s cubic-bezier(0.215, 0.61, 0.355, 1)
     alternate forwards;
@@ -137,5 +161,7 @@ const Title = styled.h2`
 
   @media screen and (max-width: 768px) {
     font-size: 1.4rem;
+    position: relative;
+    top: 1rem;
   }
 `;

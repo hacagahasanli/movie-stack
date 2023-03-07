@@ -1,24 +1,24 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import { useTrail, animated } from "react-spring";
-import { useDispatch, useSelector } from "react-redux";
-import { getNextSetMovie } from "../../redux/feature/movie-slice";
-import { Card, CardMedia, Grid, CardContent, Typography } from "@mui/material";
-import { NotFound } from "../NotFound";
-import { noImage } from "../../assets";
-import { v4 } from "uuid";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useTrail, animated } from 'react-spring';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNextSetMovie } from '../../redux/feature/movie-slice';
+import { Card, CardMedia, Grid, CardContent, Typography } from '@mui/material';
+import { NotFound } from '../NotFound';
+import { noImage } from '../../assets';
+import { v4 } from 'uuid';
 
 const Movies = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const showPage = window.innerWidth > 768 ? "Page" : "";
+  const showPage = window.innerWidth > 768 ? 'Page' : '';
   const { name } = useSelector((state) => state.movie);
   const { moviesList, error } = useSelector((state) => state.movie);
 
   const trail = useTrail(moviesList?.length, {
-    from: { opacity: 0, transform: "translate3d(0, 30px, 0)" },
-    to: { opacity: 1, transform: "translate3d(0, 0, 0)" },
+    from: { opacity: 0, transform: 'translate3d(0, 30px, 0)' },
+    to: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
     config: { mass: 1, tension: 500, friction: 35 },
     delay: 300,
   });
@@ -33,8 +33,8 @@ const Movies = () => {
 
   return (
     <Grid
-      sx={{ flexGrow: 1, position: "relative" }}
-      justifyContent="center"
+      sx={{ flexGrow: 1, position: 'relative' }}
+      justifyContent='center'
       container
     >
       <NextMovie
@@ -47,7 +47,7 @@ const Movies = () => {
         <NotFound error={error?.noMoreRelated} />
       ) : (
         <Grid item xs={9}>
-          <Grid container justifyContent="center">
+          <Grid container justifyContent='center'>
             {trail?.map((style, index) => (
               <animated.div key={v4()} style={style}>
                 <MovieItem
@@ -65,22 +65,22 @@ const Movies = () => {
 
 const MovieItem = ({ movie }) => {
   const { imdbID, Poster, Title, Year } = movie;
-  const poster = Poster.substring(0, 4) === "http" ? Poster : noImage;
+  const poster = Poster.substring(0, 4) === 'http' ? Poster : noImage;
 
   return (
-    <Grid key={imdbID} container item style={{ padding: "1rem" }}>
-      <Card sx={{ width: "350", background: "#EBEBEB" }}>
+    <Grid key={imdbID} container item style={{ padding: '1rem' }}>
+      <Card sx={{ width: '350', background: '#EBEBEB' }}>
         <StyledLink to={`/movie/${imdbID}`}>
-          <CardMedia component="img" height="350" image={poster} alt={Title} />
+          <CardMedia component='img' height='350' image={poster} alt={Title} />
           <CardContent>
             <Typography
-              style={{ fontWeight: 700, textDecoration: "none" }}
-              variant="body2"
-              color="RGB(26, 26, 26)"
+              style={{ fontWeight: 700, textDecoration: 'none' }}
+              variant='body2'
+              color='RGB(26, 26, 26)'
             >
               {Title}
             </Typography>
-            <Typography style={{ fontWeight: 700 }} color="text.primary">
+            <Typography style={{ fontWeight: 700 }} color='text.primary'>
               {Year}
             </Typography>
           </CardContent>
@@ -121,8 +121,8 @@ const BottonStyle = styled.span`
 
   @media screen and (max-width: 768px) {
     padding: 0;
-    min-width: 80px;
-    min-height: 80px;
+    min-width: 60px;
+    min-height: 40px;
     font-size: 0.9rem;
     text-align: center;
     display: flex;
@@ -136,11 +136,13 @@ const NextMovie = styled(BottonStyle)`
   right: 1rem;
   @media screen and (max-width: 768px) {
     right: 1rem;
+    bottom: 2rem;
   }
 `;
 const PrevMovie = styled(BottonStyle)`
   left: 1rem;
   @media screen and (max-width: 768px) {
     left: 0.84rem;
+    bottom: 2rem;
   }
 `;
