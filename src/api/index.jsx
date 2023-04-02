@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiKey = import.meta.env.VITE_REACT_APP_MOVIE_API_KEY;
+const apiKey = 'e7ebf3a9';
 
 const axiosInstance = axios.create({
   baseURL: 'https://www.omdbapi.com',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SearchInput } from './SearchInput';
+import SearchInput from './SearchInput';
 import styled from 'styled-components';
 
 export const Search = () => {
