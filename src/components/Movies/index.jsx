@@ -11,7 +11,9 @@ import { MovieItem } from '../MovieItem';
 const Movies = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+
   const showPage = window.innerWidth > 768 ? 'Page' : '';
+
   const { name } = useSelector((state) => state.movie);
   const { moviesList, error } = useSelector((state) => state.movie);
 

@@ -15,6 +15,7 @@ export const MovieItem = ({ movie }) => {
           <CardMedia
             component='img'
             height='350px'
+            lazy='loading'
             image={poster}
             alt={Title}
           />
@@ -41,6 +42,8 @@ const StyledCard = styled(Card)`
   max-width: 450px;
   background: #ebebeb;
 `;
+
+const StyledCardMedia = styled(CardMedia)``;
 
 const StyledLink = styled(Link)`
   text-decoration: none;

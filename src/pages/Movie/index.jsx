@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import React, { useEffect } from "react";
-import styles from "../../styles.module.css";
-import { ErrorBoundary } from "../../components";
-import { Button, Typography } from "@mui/material";
-import noImage from "../../assets/images/noImage.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { getMovie, resetMovie } from "../../redux/feature/movie-slice";
+import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import styles from '../../styles.module.css';
+import { ErrorBoundary } from '../../components';
+import { Button, Typography } from '@mui/material';
+import noImage from '../../assets/images/noImage.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getMovie, resetMovie } from '../../redux/feature/movie-slice';
 
 export const Movie = () => {
   const dispatch = useDispatch();
@@ -25,56 +25,56 @@ export const Movie = () => {
     if (id) dispatch(getMovie(id));
   }, [id]);
 
-  if (Poster !== "N/A") image = Poster;
+  if (Poster !== 'N/A') image = Poster;
 
   const goBackHandler = () => {
-    navigate("/");
+    navigate('/');
     dispatch(resetMovie());
   };
 
   const movieDetails = [
     {
       value: Title,
-      variant: "h3",
-      component: "h3",
-      id: "title",
-      color: "rgb(229, 9, 20)",
+      variant: 'h3',
+      component: 'h3',
+      id: 'title',
+      color: 'rgb(229, 9, 20)',
     },
     {
       value: `${Year}`,
-      variant: "h5",
-      component: "h5",
-      id: "year",
+      variant: 'h5',
+      component: 'h5',
+      id: 'year',
     },
     {
       value: `Released:${Released}`,
-      variant: "body2",
-      component: "p",
-      id: "released",
+      variant: 'body2',
+      component: 'p',
+      id: 'released',
     },
     {
       value: Plot,
-      variant: "body1",
-      component: "p",
-      id: "plot",
+      variant: 'body1',
+      component: 'p',
+      id: 'plot',
     },
     {
       value: `Actors : ${Actors}`,
-      variant: "h6",
-      component: "h6",
-      id: "actors",
+      variant: 'h6',
+      component: 'h6',
+      id: 'actors',
     },
     {
       value: `Director : ${Director}`,
-      variant: "h6",
-      component: "h6",
-      id: "director",
+      variant: 'h6',
+      component: 'h6',
+      id: 'director',
     },
     {
       value: rating,
-      variant: "h6",
-      component: "h6",
-      id: "rating",
+      variant: 'h6',
+      component: 'h6',
+      id: 'rating',
     },
   ];
 
@@ -88,10 +88,10 @@ export const Movie = () => {
             </div>
             <Details>
               {movieDetails?.map(
-                ({ value, variant, component, id, color = "#c0c0c0" }) => (
+                ({ value, variant, component, id, color = '#c0c0c0' }) => (
                   <Typography
                     key={id}
-                    align="left"
+                    align='left'
                     gutterBottom
                     {...{ variant, component, color }}
                   >
@@ -145,9 +145,14 @@ const Loading = styled.div`
   min-height: 400px;
   color: #c0c0c0;
   font-size: 4rem;
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 const Image = styled.img`
   max-width: 100%;
