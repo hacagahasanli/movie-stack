@@ -35,8 +35,9 @@ const CheckboxContainer = styled.div`
   margin: auto;
   margin-left: 0.1rem;
   display: flex;
-  justify-content: spce;
+  justify-content: space;
   align-items: center;
+
   p {
     max-width: 80px;
     word-wrap: break-word;
@@ -68,6 +69,7 @@ const ToggleLabel = styled.label`
   transition: 0.4s;
   box-sizing: border-box;
   top: 0.2rem;
+
   &:after {
     content: '';
     position: absolute;
@@ -80,6 +82,7 @@ const ToggleLabel = styled.label`
     background: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     transition: 0.4s;
+    cursor: pointer;
   }
   @media screen and (max-width: 768px) {
     width: 55px;

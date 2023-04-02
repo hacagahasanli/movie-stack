@@ -4,7 +4,7 @@ import React from 'react';
 import { Card, CardMedia, Grid, CardContent, Typography } from '@mui/material';
 import { noImage } from '../../assets';
 
-export const MovieItem = ({ movie }) => {
+const MovieItem = ({ movie }) => {
   const { imdbID, Poster, Title, Year } = movie;
   const poster = Poster.substring(0, 4) === 'http' ? Poster : noImage;
 
@@ -37,13 +37,12 @@ export const MovieItem = ({ movie }) => {
   );
 };
 
+export default React.memo(MovieItem);
 const StyledCard = styled(Card)`
   min-width: 350px;
   max-width: 450px;
   background: #ebebeb;
 `;
-
-const StyledCardMedia = styled(CardMedia)``;
 
 const StyledLink = styled(Link)`
   text-decoration: none;

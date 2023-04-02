@@ -3,17 +3,25 @@ import { useDispatch } from 'react-redux';
 import { getMovies } from '../../../redux';
 import styled, { keyframes } from 'styled-components';
 import { setMovieName } from '../../../redux/feature/movie-slice';
+import { ErrorBoundary } from '../../ErrorBoundary';
 
 export const SearchInput = ({ type }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState(localStorage.getItem('value') ?? 'santa');
-  const searchMovieHandler = () => !type && dispatch(getMovies(value));
+
+  const lStorage = (value) => localStorage.setItem('value', value);
+
+  const movieFinder = (value) => {
+    lStorage(value);
+    dispatch(getMovies(value));
+  };
+
+  const searchMovieHandler = () => {
+    if (!type) movieFinder(value);
+  };
 
   const debounceHandler = (value) => {
-    if (type) {
-      localStorage.setItem('value', value);
-      dispatch(getMovies(value));
-    }
+    if (type) movieFinder(value);
   };
 
   useEffect(() => {
@@ -24,7 +32,7 @@ export const SearchInput = ({ type }) => {
   }, [value]);
 
   return (
-    <>
+    <ErrorBoundary>
       <Title>MovieStack</Title>
       <FormContainer onSubmit={(e) => e.preventDefault()}>
         <FormElements>
@@ -39,7 +47,7 @@ export const SearchInput = ({ type }) => {
           </Button>
         </FormElements>
       </FormContainer>
-    </>
+    </ErrorBoundary>
   );
 };
 

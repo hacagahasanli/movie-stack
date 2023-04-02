@@ -6,7 +6,7 @@ import { getNextSetMovie } from '../../redux/feature/movie-slice';
 import { Grid } from '@mui/material';
 import { NotFound } from '../NotFound';
 import { v4 } from 'uuid';
-import { MovieItem } from '../MovieItem';
+import MovieItem from '../MovieItem';
 
 const Movies = () => {
   const dispatch = useDispatch();
