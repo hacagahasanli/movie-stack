@@ -10,11 +10,14 @@ export const MovieItem = ({ movie }) => {
 
   return (
     <Grid key={imdbID} container item style={{ padding: '1rem' }}>
-      <Card
-        sx={{ minWidth: '350px', maxWidth: '450px', background: '#EBEBEB' }}
-      >
+      <StyledCard>
         <StyledLink to={`/movie/${imdbID}`}>
-          <CardMedia component='img' height='350' image={poster} alt={Title} />
+          <CardMedia
+            component='img'
+            height='350px'
+            image={poster}
+            alt={Title}
+          />
           <CardContent>
             <Typography
               style={{ fontWeight: 700, textDecoration: 'none' }}
@@ -28,10 +31,16 @@ export const MovieItem = ({ movie }) => {
             </Typography>
           </CardContent>
         </StyledLink>
-      </Card>
+      </StyledCard>
     </Grid>
   );
 };
+
+const StyledCard = styled(Card)`
+  min-width: 350px;
+  max-width: 450px;
+  background: #ebebeb;
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
