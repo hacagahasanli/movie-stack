@@ -14,7 +14,7 @@ export const SearchInput = ({ type }) => {
 
   useEffect(() => {
     dispatch(setMovieName(value));
-    const timeoutId = setTimeout(() => debounceHandler(value), 450);
+    const timeoutId = setTimeout(() => debounceHandler(value), 400);
 
     return () => clearTimeout(timeoutId);
   }, [value]);

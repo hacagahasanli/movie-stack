@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { SearchInput } from "./SearchInput";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import { SearchInput } from './SearchInput';
+import styled from 'styled-components';
 
 export const Search = () => {
-  const [type, setType] = useState(false);
+  const [type, setType] = useState(true);
   return (
     <Container>
       <CheckboxContainer>
@@ -12,11 +12,11 @@ export const Search = () => {
             Search on <span>change</span>
           </p>
           <ToggleInput
-            id="toggle"
-            type="checkbox"
+            id='toggle'
+            type='checkbox'
             onClick={() => setType(!type)}
           />
-          <ToggleLabel htmlFor="toggle" />
+          <ToggleLabel htmlFor='toggle' />
         </ToggleContainer>
       </CheckboxContainer>
       <SearchInput {...{ type }} />
@@ -69,7 +69,7 @@ const ToggleLabel = styled.label`
   box-sizing: border-box;
   top: 0.2rem;
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     width: 38px;
     height: 38px;
@@ -98,7 +98,7 @@ const ToggleInput = styled.input`
   opacity: 0;
   cursor: pointer;
 
-  &:checked + ${ToggleLabel} {
+  :not(&:checked) + ${ToggleLabel} {
     background-color: #0f0f0f;
     &:after {
       left: 40px;
