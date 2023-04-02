@@ -44,6 +44,7 @@ const StyledCard = styled(Card)`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  color: white;
 
   &:focus,
   &:hover,
