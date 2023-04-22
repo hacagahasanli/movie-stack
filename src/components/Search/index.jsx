@@ -109,7 +109,7 @@ const ToggleInput = styled.input`
   }
 
   @media screen and (max-width: 768px) {
-    &:checked + ${ToggleLabel} {
+    :not(&:checked) + ${ToggleLabel} {
       background-color: #0f0f0f;
       &:after {
         left: 30px;
